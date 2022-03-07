@@ -36,6 +36,8 @@ print(df_test.head())
 plt.plot(wave_lens, df_train.loc[0])
 # plt.show()
 
+
+#   b(i, ii, iii)
 x0 = np.ones(wave_lens.shape[0])
 # 有点奇怪为什么(450,)和(450,)用vs堆叠成了(2, 450)
 X = np.vstack([x0, wave_lens]).T
@@ -58,6 +60,7 @@ plt.plot(wave_lens, predicts)
 # plt.show()
 
 
+#   c(i)
 pres_train = []
 for index, row in df_train.iterrows():
     print(index)
@@ -66,7 +69,7 @@ for index, row in df_train.iterrows():
     pres_train.append(predict_sample)
 
 df_smoothed_train = pd.DataFrame(pres_train, columns=df_train.columns)
-print(df_smoothed_train.shape)
+# print(df_smoothed_train.shape)
 
 pres_test = []
 for index, row in df_test.iterrows():
@@ -76,8 +79,10 @@ for index, row in df_test.iterrows():
     pres_test.append(predict_sample)
 
 df_smoothed_test = pd.DataFrame(pres_test, columns=df_test.columns)
-print(df_smoothed_test.shape)
+# print(df_smoothed_test.shape)
 
+
+#   c(ii)
 num_neighbor = 3
 wave_left = wave_lens[wave_lens < 1200]
 wave_right = wave_lens[wave_lens >= 1300]
@@ -98,19 +103,51 @@ for k, row in df_smoothed_right.iterrows():
     errors.append(error)
 
 avg_error = np.mean(errors)
-print(avg_error)
+print("average error in train {}".format(avg_error))
 
 # visualize
-fig, axes = plt.subplots(3, 3, figsize=(14, 12))
+fig, axes = plt.subplots(3, 3, figsize=(12, 10))
 axes = axes.ravel()
 
 for k, idx in enumerate([0, 5, 10, 15, 20, 25, 30, 35, 40]):
     ax = axes[k]
-    ax.plot(wave_lens, df_smoothed_train.loc[k], label="smoothed")
-    ax.plot(wave_left, f_left_pre[k], label="predicted")
+    ax.plot(wave_lens, df_smoothed_train.loc[idx], label="smoothed")
+    ax.plot(wave_left, f_left_pre[idx], label="predicted")
+    ax.legend()
+    ax.set_title('Example {}'.format(idx))
+
+# plt.show()
+
+
+#   c(iii)
+df_right_test = df_smoothed_test[wave_right]
+df_left_test = df_smoothed_test[wave_left]
+f_pre_test = []
+errors_test = []
+for k, row in df_right_test.iterrows():
+    dist = ((df_smoothed_right - row) ** 2).sum(axis=1)
+    dis_max = dist.max()
+    dis_nei = dist.sort_values()[:num_neighbor]
+    # confused
+    a = np.sum([ker(d/dis_max) * df_smoothed_left.loc[idx] for (idx, d) in dis_nei.iteritems()], axis=0)
+    b = np.sum([ker(d/dis_max) for (idx, d) in dis_nei.iteritems()], axis=0)
+    f_left_hat = a / b
+    f_pre_test.append(f_left_hat)
+    error = np.sum((f_left_hat - df_left_test.loc[k]) ** 2)
+    errors_test.append(error)
+
+avg_error_test = np.mean(errors_test)
+print("average error in test {}".format(avg_error_test))
+
+# visualize
+fig, axes = plt.subplots(3, 3, figsize=(12, 10))
+axes = axes.ravel()
+
+for k, idx in enumerate([0, 5, 10, 15, 20, 25, 30, 35, 40]):
+    ax = axes[k]
+    ax.plot(wave_lens, df_smoothed_test.loc[idx], label="smoothed")
+    ax.plot(wave_left, f_pre_test[idx], label="predicted")
     ax.legend()
     ax.set_title('Example {}'.format(idx))
 
 plt.show()
-
-
