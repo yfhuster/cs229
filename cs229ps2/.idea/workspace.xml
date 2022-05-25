@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="734b0051-051d-42b0-9e81-8f297b8f2d2a" name="Changes" comment="add ps2">
-      <change beforePath="$PROJECT_DIR$/.idea/cs229ps2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cs229ps2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="734b0051-051d-42b0-9e81-8f297b8f2d2a" name="Changes" comment="complete ps2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +21,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="bbccfe82-28d3-411b-97a7-1c832d1e3c63" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/answer.py" root0="SKIP_INSPECTION" />
@@ -160,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646809239475</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="complete ps2">
+      <created>1653469351654</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653469351654</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +214,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add ps2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add ps2" />
+    <MESSAGE value="complete ps2" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete ps2" />
   </component>
 </project>
